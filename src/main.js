@@ -1,1 +1,3 @@
-console.log("hello");
+export function lala() {
+  return "hello";
+}
