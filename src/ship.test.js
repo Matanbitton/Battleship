@@ -11,7 +11,16 @@ test("check if ship is sunk", () => {
   expect(ship.isSunk()).toBeFalsy();
   ship.hitPos(1);
   expect(ship.isSunk()).toBeFalsy();
-
   ship.hitPos(2);
   expect(ship.isSunk()).toBeTruthy();
+});
+
+test("check if ship parts are hit", () => {
+  let ship = Ship(3, 0);
+  ship.hitPos(0);
+  ship.hitPos(2);
+
+  expect(ship.shipParts[0]).toBeTruthy();
+  expect(ship.shipParts[1]).toBeFalsy();
+  expect(ship.shipParts[2]).toBeTruthy();
 });
