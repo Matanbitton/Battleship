@@ -1,15 +1,19 @@
-function Ship(length, hit, sunk) {
-  return {
-    ship: new new Array(length)(),
-    length,
-    hit,
-    sunk,
-    hit(number) {
-      this.hit[number] = true;
-    },
-    isSunk() {
-      let shipPartsHit = this.hit.filter((part) => part == true);
-      return shipPartsHit.length == length;
-    },
+export const Ship = (length, hit) => {
+  const shipParts = new Array(length);
+
+  const hitPos = (pos) => {
+    shipParts[pos] = true;
   };
-}
+
+  const isSunk = () => {
+    let shipPartsHit = shipParts.filter((part) => part === true);
+    return shipPartsHit.length === length;
+  };
+
+  return {
+    length,
+    hitPos,
+    shipParts,
+    isSunk,
+  };
+};
