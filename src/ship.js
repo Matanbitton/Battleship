@@ -1,19 +1,25 @@
-export const Ship = (length, hit) => {
-  const shipParts = new Array(length);
+export class Ship {
+  constructor(length, id) {
+    this.length = length;
+    this.shipID = id;
+    this.shipParts = this.createShip();
+  }
+  createShip() {
+    let temp = [];
+    let i = 0;
+    while (i <= this.length) {
+      temp.push({ hit: false });
+      i++;
+    }
+    return temp;
+  }
 
-  const hitPos = (pos) => {
-    shipParts[pos] = true;
+  hitPos = (pos) => {
+    this.shipParts[pos] = { hit: true };
   };
 
-  const isSunk = () => {
-    let shipPartsHit = shipParts.filter((part) => part === true);
-    return shipPartsHit.length === length;
+  isSunk = () => {
+    let shipPartsHit = this.shipParts.filter((part) => part.hit === true);
+    return shipPartsHit.length === this.length;
   };
-
-  return {
-    length,
-    hitPos,
-    shipParts,
-    isSunk,
-  };
-};
+}
