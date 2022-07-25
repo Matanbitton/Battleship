@@ -89,3 +89,14 @@ test("Check if all ships sunk", () => {
 
   expect(gameboard.checkIfAllShipsSunk(ship1, ship2, ship3)).toBeTruthy();
 });
+
+test("if missed shots counted", () => {
+  let gameboard = new GameBoard();
+  let ship1 = new Ship(1, "A");
+  gameboard.placeShipHorizontal(ship1);
+
+  gameboard.receiveAttack(ship1, 4, 6);
+
+  expect(gameboard.missedShots[0]).toEqual({ coorX: 4, coorY: 6 });
+  expect(gameboard.missedShots[1]).toBeUndefined();
+});

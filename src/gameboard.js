@@ -7,6 +7,9 @@ export class GameBoard {
   getMissedShots() {
     return this.missedShots;
   }
+  addMissedShots(x, y) {
+    this.missedShots.push({ coorX: x, coorY: y });
+  }
 
   createGrid() {
     let tempGrid = [];
@@ -97,6 +100,7 @@ export class GameBoard {
       ship.hitPos(this.grid[x][y].shipPartIndex);
       return true;
     }
+    this.addMissedShots(x, y);
     return false;
   }
 }
