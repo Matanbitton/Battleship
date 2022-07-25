@@ -7,7 +7,7 @@ export class Ship {
   createShip() {
     let temp = [];
     let i = 0;
-    while (i <= this.length) {
+    while (i < this.length) {
       temp.push({ hit: false });
       i++;
     }

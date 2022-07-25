@@ -4,7 +4,7 @@ test("check if ship was created correctly", () => {
   let ship = new Ship(3, "A");
 
   expect(ship).toBeDefined();
-  expect(ship.shipParts.length).toBe(4);
+  expect(ship.shipParts.length).toBe(3);
 });
 
 test("check if ship is sunk", () => {
