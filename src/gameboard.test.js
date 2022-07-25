@@ -1,40 +1,38 @@
 import { Ship } from "./ship";
 import { GameBoard } from "./gameboard";
-import { template } from "@babel/core";
 
 test("check if ship coordiantes are correct after placing", () => {
   let ship = new Ship(4, "A");
   let gameboard = new GameBoard();
   gameboard.placeShipHorizontal(ship, 0, 0);
-  gameboard.placeShipVertical(ship, 0, 0);
 
   expect(gameboard.grid[0][5]).toEqual({
-    shipId: undefined,
+    ship: undefined,
     shipPartIndex: undefined,
     hit: false,
   });
   expect(gameboard.grid[5][0]).toEqual({
-    shipId: undefined,
+    ship: undefined,
     shipPartIndex: undefined,
     hit: false,
   });
   expect(gameboard.grid[0][0]).toEqual({
-    shipId: "A",
+    ship: ship,
     shipPartIndex: 4,
     hit: false,
   });
   expect(gameboard.grid[0][1]).toEqual({
-    shipId: "A",
+    ship: ship,
     shipPartIndex: 3,
     hit: false,
   });
   expect(gameboard.grid[0][2]).toEqual({
-    shipId: "A",
+    ship: ship,
     shipPartIndex: 2,
     hit: false,
   });
   expect(gameboard.grid[0][3]).toEqual({
-    shipId: "A",
+    ship: ship,
     shipPartIndex: 1,
     hit: false,
   });
@@ -61,12 +59,12 @@ test("Check if ship received Attack", () => {
   let gameboard = new GameBoard();
   gameboard.placeShipHorizontal(ship, 0, 0);
 
-  expect(gameboard.receiveAttack(ship, 0, 0)).toBeTruthy();
-  expect(gameboard.receiveAttack(ship, 0, 1)).toBeTruthy();
-  expect(gameboard.receiveAttack(ship, 0, 2)).toBeTruthy();
-  expect(gameboard.receiveAttack(ship, 0, 3)).toBeTruthy();
+  expect(gameboard.receiveAttack(0, 0)).toBeTruthy();
+  expect(gameboard.receiveAttack(0, 1)).toBeTruthy();
+  expect(gameboard.receiveAttack(0, 2)).toBeTruthy();
+  expect(gameboard.receiveAttack(0, 3)).toBeTruthy();
 
-  expect(gameboard.receiveAttack(ship, 0, 4)).toBeFalsy();
+  expect(gameboard.receiveAttack(0, 4)).toBeFalsy();
 });
 
 test("Check if all ships sunk", () => {
@@ -93,10 +91,10 @@ test("Check if all ships sunk", () => {
 test("if missed shots counted", () => {
   let gameboard = new GameBoard();
   let ship1 = new Ship(1, "A");
-  gameboard.placeShipHorizontal(ship1);
+  gameboard.placeShipHorizontal(ship1, 0, 0);
 
-  gameboard.receiveAttack(ship1, 4, 6);
+  gameboard.receiveAttack(5, 3);
 
-  expect(gameboard.missedShots[0]).toEqual({ coorX: 4, coorY: 6 });
+  expect(gameboard.missedShots[0]).toEqual({ coorX: 5, coorY: 3 });
   expect(gameboard.missedShots[1]).toBeUndefined();
 });

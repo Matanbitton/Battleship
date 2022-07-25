@@ -17,7 +17,7 @@ export class GameBoard {
     for (let i = 0; i <= 10; i++) {
       for (let j = 0; j <= 10; j++) {
         tempArray.push({
-          shipId: undefined,
+          ship: undefined,
           shipPartIndex: undefined,
           hit: false,
         });
@@ -34,7 +34,7 @@ export class GameBoard {
         if (i === x && j === y) {
           while (ship.length - j > 0) {
             this.grid[i][j] = {
-              shipId: ship.shipID,
+              ship: ship,
               shipPartIndex: Math.abs(ship.length - j),
               hit: false,
             };
@@ -59,7 +59,7 @@ export class GameBoard {
         if (i === x && j == y) {
           while (i - ship.length > 0) {
             this.grid[i][j] = {
-              shipId: ship.shipID,
+              ship: ship,
               shipPartIndex: Math.abs(ship.length - i),
               hit: false,
             };
@@ -84,8 +84,8 @@ export class GameBoard {
       for (let i = x; i < x + ship.length; i++) {
         for (let j = y; j < y + ship.length; j++) {
           if (
-            this.grid[x][i].shipId !== undefined ||
-            this.grid[y][j].shipId !== undefined
+            this.grid[x][i].ship !== undefined ||
+            this.grid[y][j].ship !== undefined
           ) {
             return true;
           }
@@ -94,10 +94,11 @@ export class GameBoard {
     }
     return false;
   }
-  receiveAttack(ship, x, y) {
-    if (this.grid[x][y].shipId !== undefined) {
+  receiveAttack(x, y) {
+    if (this.grid[x][y].ship !== undefined) {
       this.grid[x][y].hit = true;
-      ship.hitPos(this.grid[x][y].shipPartIndex);
+
+      this.grid[x][y].ship.hitPos(this.grid[x][y].shipPartIndex);
       return true;
     }
     this.addMissedShots(x, y);

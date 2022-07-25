@@ -12,7 +12,7 @@ export class Player {
   };
 
   playerAttack(opponent, x, y) {
-    opponent.board.receiveAttack(null, x, y);
+    opponent.board.receiveAttack(x, y);
     this.changeTurn();
   }
 }
