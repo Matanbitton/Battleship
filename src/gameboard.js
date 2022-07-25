@@ -24,7 +24,7 @@ export class GameBoard {
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid[i].length; j++) {
         if (i === x && j === y) {
-          while (ship.length - j >= 0) {
+          while (ship.length - j > 0) {
             this.grid[i][j] = {
               shipId: ship.shipID,
               shipPartIndex: Math.abs(ship.length - j),
@@ -41,7 +41,7 @@ export class GameBoard {
     for (let i = 0; i < this.grid.length; i++) {
       for (let j = 0; j < this.grid[i].length; j++) {
         if (i === x && j == y) {
-          while (i - ship.length >= 0) {
+          while (i - ship.length > 0) {
             this.grid[i][j] = {
               shipId: ship.shipID,
               shipPartIndex: Math.abs(ship.length - i),
