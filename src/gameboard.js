@@ -1,6 +1,11 @@
 export class GameBoard {
   constructor() {
     this.grid = this.createGrid();
+    this.missedShots = [];
+  }
+
+  getMissedShots() {
+    return this.missedShots;
   }
 
   createGrid() {
@@ -36,6 +41,14 @@ export class GameBoard {
       }
     }
   };
+  checkIfAllShipsSunk(...ships) {
+    const sunkenShips = ships.filter((ship) => ship.isSunk() == true);
+    if (sunkenShips.length == ships.length) {
+      return true;
+    }
+
+    return false;
+  }
 
   placeShipVertical = (ship, x, y) => {
     for (let i = 0; i < this.grid.length; i++) {

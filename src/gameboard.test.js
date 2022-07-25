@@ -1,5 +1,6 @@
 import { Ship } from "./ship";
 import { GameBoard } from "./gameboard";
+import { template } from "@babel/core";
 
 test("check if ship coordiantes are correct after placing", () => {
   let ship = new Ship(4, "A");
@@ -66,4 +67,25 @@ test("Check if ship received Attack", () => {
   expect(gameboard.receiveAttack(ship, 0, 3)).toBeTruthy();
 
   expect(gameboard.receiveAttack(ship, 0, 4)).toBeFalsy();
+});
+
+test("Check if all ships sunk", () => {
+  let gameboard = new GameBoard();
+  let ship1 = new Ship(1, "A");
+  let ship2 = new Ship(2, "B");
+  let ship3 = new Ship(3, "C");
+  let ship4 = new Ship(4, "D");
+
+  ship1.hitPos(0);
+  ship2.hitPos(0);
+  ship2.hitPos(1);
+
+  expect(gameboard.checkIfAllShipsSunk(ship1, ship2)).toBeTruthy();
+  expect(gameboard.checkIfAllShipsSunk(ship3, ship4)).toBeFalsy();
+
+  ship3.hitPos(0);
+  ship3.hitPos(1);
+  ship3.hitPos(2);
+
+  expect(gameboard.checkIfAllShipsSunk(ship1, ship2, ship3)).toBeTruthy();
 });
