@@ -1,7 +1,7 @@
 import { Ship } from "./ship";
 import { GameBoard } from "./gameboard";
 
-test("check if ship coordiantes are correct", () => {
+test("check if ship coordiantes are correct after placing", () => {
   let ship = new Ship(4, "A");
   let gameboard = new GameBoard();
   gameboard.placeShipHorizontal(ship, 0, 0);
@@ -56,7 +56,7 @@ test("Check is ship placement is out of bounds", () => {
 });
 
 test("Check if ship received Attack", () => {
-  let ship = new Ship(3, "B");
+  let ship = new Ship(4, "B");
   let gameboard = new GameBoard();
   gameboard.placeShipHorizontal(ship, 0, 0);
 
