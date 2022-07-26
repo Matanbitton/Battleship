@@ -5,13 +5,13 @@ export class Ship {
     this.shipParts = this.createShip();
   }
   createShip() {
-    let temp = [];
+    let parts = [];
     let i = 0;
-    while (i < this.length) {
-      temp.push({ hit: false });
+    while (i <= this.length) {
+      parts.push({ hit: false });
       i++;
     }
-    return temp;
+    return parts;
   }
 
   hitPos = (pos) => {
