@@ -14,8 +14,8 @@ export class GameBoard {
   createGrid() {
     let tempGrid = [];
     let tempArray = [];
-    for (let i = 0; i <= 10; i++) {
-      for (let j = 0; j <= 10; j++) {
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
         tempArray.push({
           ship: undefined,
           shipPartIndex: undefined,
@@ -30,15 +30,17 @@ export class GameBoard {
 
   placeShipHorizontal = (ship, x, y) => {
     for (let i = 0; i < this.grid.length; i++) {
-      for (let j = 0; j < this.grid[i].length; j++) {
+      for (let j = 0; j < this.grid.length; j++) {
         if (i === x && j === y) {
-          while (ship.length - j > 0) {
+          let shipLength = ship.length;
+          while (j < this.grid.length && shipLength >= 0) {
             this.grid[i][j] = {
               ship: ship,
-              shipPartIndex: Math.abs(ship.length - j),
+              shipPartIndex: shipLength,
               hit: false,
             };
             j++;
+            shipLength--;
           }
         }
       }
