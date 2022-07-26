@@ -5,6 +5,7 @@ export class Player {
     this.type = type;
     this.board = new GameBoard();
     this.turn = this.type === "bot" ? false : true;
+    this.fleet = [];
   }
 
   changeTurn = () => {
