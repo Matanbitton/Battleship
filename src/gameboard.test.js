@@ -55,7 +55,7 @@ test("Check is ship placement is out of bounds", () => {
 });
 
 test("Check if ship received Attack", () => {
-  let ship = new Ship(4, "B");
+  let ship = new Ship(3, "B");
   let gameboard = new GameBoard();
   gameboard.placeShipHorizontal(ship, 0, 0);
 
