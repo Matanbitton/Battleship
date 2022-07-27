@@ -47,7 +47,7 @@ export class GameBoard {
     }
   };
   checkIfAllShipsSunk(...ships) {
-    const sunkenShips = ships.filter((ship) => ship.isSunk() == true);
+    const sunkenShips = ships.filter((ship) => ship.isSunk() === true);
     if (sunkenShips.length == ships.length) {
       return true;
     }
@@ -57,45 +57,34 @@ export class GameBoard {
 
   placeShipVertical = (ship, x, y) => {
     for (let i = 0; i < this.grid.length; i++) {
-      for (let j = 0; j < this.grid[i].length; j++) {
+      for (let j = 0; j < this.grid.length; j++) {
         if (i === x && j == y) {
-          while (i - ship.length > 0) {
+          let shipLength = ship.length;
+          while (i < this.grid.length && shipLength >= 0) {
             this.grid[i][j] = {
               ship: ship,
-              shipPartIndex: Math.abs(ship.length - i),
+              shipPartIndex: shipLength,
               hit: false,
             };
             i++;
+            shipLength--;
           }
         }
       }
     }
   };
 
-  isShipPlacementOutOfBounds(ship, x, y) {
-    if (
-      x > 10 ||
-      x < 0 ||
-      y > 10 ||
-      y < 0 ||
-      y + ship.length > 10 ||
-      x + ship.length > 10
-    ) {
-      return true;
-    } else {
-      for (let i = x; i < x + ship.length; i++) {
-        for (let j = y; j < y + ship.length; j++) {
-          if (
-            this.grid[x][i].ship !== undefined ||
-            this.grid[y][j].ship !== undefined
-          ) {
-            return true;
-          }
+  shipPlacementTaken(ship, x, y) {
+    for (let i = x; i < x + ship.length; i++) {
+      for (let j = y; j < y + ship.length; j++) {
+        if (this.grid[x][y].ship !== undefined) {
+          return true;
         }
       }
     }
     return false;
   }
+
   receiveAttack(x, y) {
     if (this.grid[x][y].ship !== undefined) {
       this.grid[x][y].hit = true;
