@@ -1,3 +1,40 @@
-html {
-  background-color: black;
+body {
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+  background-color: rgb(2, 31, 49);
+
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.game {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 30px;
+}
+.container-bot > .row > .cell {
+  background-color: rgb(0, 174, 255);
+}
+
+.cell[data-square="ship"][data-hit="hit"] {
+  background-color: brown;
+}
+.cell {
+  min-width: 50px;
+  min-height: 50px;
+  background-color: rgb(0, 174, 255);
+  border: 1px solid black;
+}
+.cell:hover {
+  cursor: pointer;
+}
+.cell[data-square="ship"] {
+  background-color: rgb(75, 72, 72);
+}
+.row {
+  display: flex;
 }
